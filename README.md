@@ -144,4 +144,14 @@ unique(name); -- we can have more than one feild, comma seperated. It will const
 alter table Student
 drop constraint name_uc;
 
+-- creating views in sql
+-- views are virtual tables over real tables and we can apply sql over it like any other normal table
+create view student_laptop as
+select u.id, u.name as studentName, v.name as laptop from student u
+join laptop v on u.id = v.studentId order by u.id;
+
+select * from student_laptop;
+
+drop view student_laptop;
+
 ```
