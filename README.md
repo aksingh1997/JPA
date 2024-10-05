@@ -3,7 +3,7 @@
 
 #### Sql commnads (can be run sequentially to see the output)
 ``` mysql
--- crete database
+-- create database
 create database college
 
 -- use a database.
@@ -122,13 +122,26 @@ alter table Student modify column name varchar(20);
 select column_name, constraint_name from information_schema.KEY_COLUMN_USAGE 
 where table_name = 'Laptop';
 
--- drop the foregin key constraint, took foreign key constraint name from previous query. better to give name to each constraint
+-- drop the foregin key constraint (mySql), took foreign key constraint name from previous query. better to give name to each constraint
 alter table Laptop
 drop FOREIGN KEY laptop_ibfk_1;
+
+-- drop foriegn key constraint (oracle)
+alter table Laptop
+drop constraint laptop_ibfk_1;
 
 -- add foreign key constraint again
 alter table Laptop
 add constraint studentId_fk -- providing a constraint name
 foreign key(studentId) references Student(id);
+
+-- add unique constraint
+alter table Student
+add constraint name_uc --its alsways better to give your constraints a name
+unique(name); -- we can have more than one feild, comma seperated. It will constrain the entries to be unique for the combination of params provided here. 
+
+-- remove unique constraint
+alter table Student
+drop constraint name_uc;
 
 ```
