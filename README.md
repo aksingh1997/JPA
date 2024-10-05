@@ -1,6 +1,12 @@
-* To start/stop mysql server - Windows+R -> services.msc -> MYSQL80 -> RightClick -> start/stop
+#### To start/stop mysql server -
+* Windows+R -> services.msc -> MYSQL80 -> RightClick -> start/stop
 
+#### Sql commnads (can be run sequentially to see the output)
 ``` mysql
+-- crete database
+create database college
+
+-- use a database.
 use college;
 
 -- create table
