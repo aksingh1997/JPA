@@ -3,6 +3,16 @@
 
 #### Sql commnads (can be run sequentially to see the output)
 ``` mysql
+
+-- string concatenation can be done using + sign, we also have concat('first', 'second') method, but below one is more handy
+SELECT 'SQL' + ' ' + 'is' + ' ' + 'fun!';
+
+-- Substring.. sql is 1-based, 1 to 4 inclusive
+select substr("I am learning", 1, 4) as substr;
+
+-- replace(my string, old susbstring to be replaced, new substring to replace)
+select replace("I am learning", 'am', 'was') as sentence;
+
 -- create database
 create database college
 
@@ -155,3 +165,4 @@ select * from student_laptop;
 drop view student_laptop;
 
 ```
+* Dealing with sql dates is remaining...
