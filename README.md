@@ -114,5 +114,21 @@ select * from Student where id = (select id from laptop where name = 'Dell');
 -- null handling
 select COALESCE(name, 'unknown laptop') from laptop; -- mySql dont support nvl() , oracle supports both. nvl = COALESCE
 
+-- modify column, adding not null constraint and removing
+alter table Student modify column name varchar(20) not null;
+alter table Student modify column name varchar(20);
+
+-- used to find out constraint name, I want to drop the foreign key constraint , but don't know its name, so ran the below query
+select column_name, constraint_name from information_schema.KEY_COLUMN_USAGE 
+where table_name = 'Laptop';
+
+-- drop the foregin key constraint, took foreign key constraint name from previous query. better to give name to each constraint
+alter table Laptop
+drop FOREIGN KEY laptop_ibfk_1;
+
+-- add foreign key constraint again
+alter table Laptop
+add constraint studentId_fk -- providing a constraint name
+foreign key(studentId) references Student(id);
 
 ```
