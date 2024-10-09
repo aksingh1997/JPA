@@ -68,4 +68,19 @@
 * @Transactional - This annotation is required if we want to persist the changes in database, other wise the data will only be persisted by persistent context and not get flushed into database.
 * Just autowired this interface in your service layer and we are good to go for utilizing JPARepository's methods.
 * To save an object(row) in database, use - jpaObject.save(object). If we want to bulk insert the rows (list of objects) use saveAll(objectList);
-* @OneToMany relationship - 
+* @OneToMany relationship
+  - Lets take an example of Student and Book class.
+  - Each Student can have list of book, and one book can be owned by a student.
+  - We want that in database, Book table should contain a column with student_id which is foreign key referencing Student table's id. Let see code - 
+  - Student class @OneToMany
+    ``` java
+    @OneToMany(mappedBy = "student", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+      List<Book> bookList;
+    ```
+    We can see that each student can have list of books. Since this annotation contains mappedBy field, this is non-owning side of relationhip. This means
+    student table will not contain any actual column corresponding to this feild. Lets see the params - 
+    1. mappedBy states that there is a variable/object with name student in another class which is annotated with @ManyToOne 
+    2. fetchType = Lazy => When Student object is loaded by JPA, lets say we did findById(), bookList will not be loaded unless we call getter method for
+       this variable. fetchType = Eager => bookList gets loaded when we do findById() or similar query. Lazy approach is generally preferred and it is default
+       on @OneToMany side. Behind the scenes, bookList is loaded by JPA using JOIN call.
+    3. cascadeType = All => It means if a student row is deleted, the book's row that refers to that studentId will also get delelted.
