@@ -121,3 +121,4 @@
 Pending items - 
 1. @ManyToMany
 2. Delete records from database.
+3. Configure two datasources.
