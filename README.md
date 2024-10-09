@@ -84,3 +84,11 @@
        this variable. fetchType = Eager => bookList gets loaded when we do findById() or similar query. Lazy approach is generally preferred and it is default
        on @OneToMany side. Behind the scenes, bookList is loaded by JPA using JOIN call.
     3. cascadeType = All => It means if a student row is deleted, the book's row that refers to that studentId will also get delelted.
+  - Book class @ManyToOne
+    ``` java
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "studentId")
+    Student student;
+    ```
+    Here we have declared student as a field with Join column name = studentId, this is owning side of relationship and a column with name student_id gets
+    created in Book Table in database. Also this field student_id acts as foreign key which references the primary key of Student table, i.e. Id.
