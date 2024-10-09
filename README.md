@@ -93,3 +93,27 @@
     Here we have declared student as a field with Join column name = studentId, this is owning side of relationship and a column with name student_id gets
     created in Book Table in database. Also this field student_id acts as foreign key which references the primary key of Student table, i.e. Id.
     By defailt the fetch type at @ManyToOne side is eager, since its just a single row of student to be mapped here.
+* Some Observations -
+  1. In the above student-book table, student has a list of books which is populated when jpa applies a join operation on both the tables. There is no physical
+     meaning of this field in student table. So don't try to enter a book using add method in the list, we may face exceptions.
+## PersistentContext
+* Consider this as cache between jvm and database.
+* Any object that is saved into database first goes to persistent context and then it is saved to database as a row.
+* If we try to fetch data in java, it first looks from persistent context and if not present, will load it from db to peristent context.
+* The object that is lying in persistent context is called managed object.
+* Dirty checking- We may fetch the object from persisten context and try to update a few fields, say - name. Now persistent context checks if the object it
+  holds is same as the one in jvm or has changed, if changed then upate the manged entity there too. Thisis called dirty checking, 
+* Even after dirty checking , the changes will not reflect in database as data is not flushed from persistent context to db
+* We can make a method annotated with @Transactional, which fluses the changes once the scope of that method is over.
+* Example -
+  ``` java
+  @Modifying // without this, JPA consider that queries are read only. This is required for update/delete
+    @Transactional // This is required inorder to persist the data in actual database. Without this data will only
+    // be persisted in persistent context, but not in actual database.
+    public void updateStreamById(int id, String stream) {
+        Student s = studentRepo.findById(id).orElseThrow();
+        // here we are trying to update the managed entity by JPA
+        // managed entity means those entities that are persist in persistent context
+        s.setSubjectStream(stream);
+    }
+  ```
