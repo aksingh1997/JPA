@@ -100,9 +100,9 @@
 * Consider this as cache between jvm and database.
 * Any object that is saved into database first goes to persistent context and then it is saved to database as a row.
 * If we try to fetch data in java, it first looks from persistent context and if not present, will load it from db to peristent context.
-* The object that is lying in persistent context is called managed object.
-* Dirty checking- We may fetch the object from persisten context and try to update a few fields, say - name. Now persistent context checks if the object it
-  holds is same as the one in jvm or has changed, if changed then upate the manged entity there too. Thisis called dirty checking, 
+* The object that is lying in persistent context is called managed entity.
+* Dirty checking- We may fetch the object from persisten context and try to update a few fields, say - name. Now persistent context checks if the entity it
+  holds is same as the one in jvm or has changed, if changed then upate the manged entity there too. This is called dirty checking, 
 * Even after dirty checking , the changes will not reflect in database as data is not flushed from persistent context to db
 * We can make a method annotated with @Transactional, which fluses the changes once the scope of that method is over.
 * Example -
