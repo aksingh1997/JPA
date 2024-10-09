@@ -82,7 +82,7 @@
     1. mappedBy states that there is a variable/object with name student in another class which is annotated with @ManyToOne 
     2. fetchType = Lazy => When Student object is loaded by JPA, lets say we did findById(), bookList will not be loaded unless we call getter method for
        this variable. fetchType = Eager => bookList gets loaded when we do findById() or similar query. Lazy approach is generally preferred and it is default
-       on @OneToMany side. Behind the scenes, bookList is loaded by JPA using JOIN call.
+       on @OneToMany side. Behind the scenes, bookList is loaded by JPA using JOIN operation.
     3. cascadeType = All => It means if a student row is deleted, the book's row that refers to that studentId will also get delelted.
   - Book class @ManyToOne
     ``` java
@@ -92,3 +92,4 @@
     ```
     Here we have declared student as a field with Join column name = studentId, this is owning side of relationship and a column with name student_id gets
     created in Book Table in database. Also this field student_id acts as foreign key which references the primary key of Student table, i.e. Id.
+    By defailt the fetch type at @ManyToOne side is eager, since its just a single row of student to be mapped here.
