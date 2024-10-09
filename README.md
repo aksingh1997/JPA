@@ -119,5 +119,5 @@
   ```
 ------------------------------------------------------
 Pending items - 
-a. @ManyToMany
-b. Delete records from database.
+1. @ManyToMany
+2. Delete records from database.
