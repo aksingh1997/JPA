@@ -117,3 +117,7 @@
         s.setSubjectStream(stream);
     }
   ```
+------------------------------------------------------
+Pending items - 
+a. @ManyToMany
+b. Delete records from database.
